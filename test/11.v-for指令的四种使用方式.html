@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-for指令的四种使用方式</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <!-- v-model只能运用在表单元素中 -->
+    <div id="app">
+        <ul>
+            <li v-for="item in list">{{item}}</li>
+        </ul>   
+
+        <ul>
+            <li v-for="(item,index) in list">{{item}}--{{index}}</li>
+        </ul>   
+
+        <p v-for="item in list2">{{item.id}}--{{item.name}}</p>
+
+        <p v-for="(item,index) in list2">{{item.id}}--{{item.name}}--{{index}}</p>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+               list:[1,2,3,4,54,6],
+               list2:[
+                   {id:1,name:'zs1'},
+                   {id:2,name:'zs2'},
+                   {id:3,name:'zs3'},
+                   {id:4,name:'zs4'},
+               ]
+            },
+            methods:{
+               
+            }
+        })
+    </script>
+</body>
+</html>

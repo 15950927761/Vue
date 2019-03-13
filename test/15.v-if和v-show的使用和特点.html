@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-if和v-show的使用和特点 </title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+   
+    <div id="app">
+        <input type="button" value="切换" @click="toggle">
+        <!-- v-if的特点是每次都会重新删除和创建元素，有较高的切换性能消耗
+        v-show的特点，每次不会重新进行dom的删除和创建操作，只是切换了元素的display:none样式，
+        有较高的初始渲染消耗，如果元素涉及到频繁的切换，最好不要用v-if,而是推荐使用v-show,
+        如果元素可能 永远也不会显示出来 给客户看到，则推荐使用v-if -->
+        <h3 v-if="flag">但愿人长久，千里共蝉娟</h3>
+        <h3 v-show="flag">但愿人长久，千里共蝉娟</h3>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                flag:true
+            },
+            methods:{
+                toggle(){
+                    this.flag = !this.flag
+                }
+            }
+        })
+    </script>
+</body>
+</html>

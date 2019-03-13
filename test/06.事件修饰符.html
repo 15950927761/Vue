@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>事件修饰符</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <style>
+        .inner{height:150px;background:lightblue;}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="inner" @click="divClick">
+            <!-- .stop阻止冒泡 -->
+            <input type="button" value="戳他" @click.stop="btnClick">
+            <!-- .prevent阻止默认事件 -->
+            <a href="http://www.baidu.com" @click.prevent="linkClick">百度</a>
+            <!-- .capture实现捕获触发事件的机制，从外往里捕获 -->
+            <!-- .self实现只有点击当前元素才会触发事件处理函数 -->
+            <!-- .once事件只触发一次 -->
+
+
+        </div>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+               
+            },
+            methods:{
+                divClick(){
+                    console.log('divClick')
+                },
+                btnClick(){
+                    console.log('btnClick');
+                },
+                linkClick(){
+                    alert('弹窗');
+                }
+            }
+        })
+    </script>
+</body>
+</html>

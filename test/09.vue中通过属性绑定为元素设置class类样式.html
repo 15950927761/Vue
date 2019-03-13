@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue中通过属性绑定为元素设置class类样式</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <style>
+        .red{color:red;}
+        .thin{font-weight:200;}
+        .italic{font-style: italic;}
+        .active{letter-spacing: 0.5em;}
+    </style>
+</head>
+<body>
+    <!-- v-model只能运用在表单元素中 -->
+    <div id="app">
+        <h1 class="red thin">海客谈没说话，烟涛雾㤃信难求，越人语天线</h1>
+
+        <!-- 第一种使用方式，直接传递一个数组，这里的class需要使用v-bind做数据绑定 -->
+        <h1 :class="['red' ,'thin']">海客谈没说话，烟涛雾㤃信难求，越人语天线</h1>
+
+        <!-- 在数组中使用三元表达式 -->
+        <h1 :class="['red' ,'thin', flag?'active':'']">海客谈没说话，烟涛雾㤃信难求，越人语天线</h1>
+
+        <!-- 在数组中使用对象代替三元表达式，提高代码可读性 -->
+        <h1 :class="['red' ,'thin', {'active':flag}]">海客谈没说话，烟涛雾㤃信难求，越人语天线</h1>
+
+        <!-- 在为class使用v-bind绑定对象的时候，对象的属性是类名，对象属性可带引号，也可不带引号，所以这里我们没带引号 -->
+        <h1 :class="{red:false,thin:true,italic:false,active:true}">海客谈没说话，烟涛雾㤃信难求，越人语天线</h1>
+
+        <h1 :class="classObj">海客谈没说话，烟涛雾㤃信难求，越人语天线</h1>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+               flag:true,
+               classObj:{red:false,thin:true,italic:false,active:false}
+            },
+            methods:{
+               
+            }
+        })
+    </script>
+</body>
+</html>

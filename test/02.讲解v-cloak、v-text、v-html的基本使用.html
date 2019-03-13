@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>讲解v-cloak、v-text、v-html的基本使用</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <style>
+        [v-cloak]{
+            display:none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- v-cloak能够解决插值表达式的闪烁问题，前后可放任意内容 -->
+        <!-- <p v-cloak>===={{msg}}-------</p> -->
+       <!-- v-text默认是没有闪烁问题的，会覆盖元素中原来的内容，不可放任意内容，下例中会把等号替换掉 -->
+        <!-- <p v-text="msg">======</p> -->
+        <p v-html="msg2"></p>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                msg:'v-cloak,v-text,v-html',
+                msg2:'<h1>我是一个大的h1</h1>'
+            }
+        })
+    </script>
+</body>
+</html>

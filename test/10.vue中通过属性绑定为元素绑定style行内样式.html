@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue中通过属性绑定为元素绑定style行内样式</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <!-- v-model只能运用在表单元素中 -->
+    <div id="app">
+        <h1 :style="{color:'red','font-weight':200}">海客谈没说话，烟涛雾㤃信难求，越人语天线</h1>
+
+        <h1 :style="styleObj">海客谈没说话，烟涛雾㤃信难求，越人语天线</h1>
+
+        <h1 :style="[styleObj,styleObj2]">海客谈没说话，烟涛雾㤃信难求，越人语天线</h1>
+
+        
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+               styleObj:{'font-weight':200},
+               styleObj2:{color:'red',"letter-spacing":'0.5em'}
+            },
+            methods:{
+               
+            }
+        })
+    </script>
+</body>
+</html>
