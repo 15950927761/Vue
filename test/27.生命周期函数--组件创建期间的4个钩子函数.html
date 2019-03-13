@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>组建创建期间的4个钩子函数</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+
+    <!-- 什么是生命周期：从Vue实例创建、运行、到销毁期间，总是伴随着各种各样的事件，这些事件，统称为生命周期 -->
+   <!-- 生命周期钩子：就是生命周期事件（函数）的别名而已 -->
+   <!-- 主要的 生命周期函数分类：
+   创建期间的生命周期函数：
+        beforeCreate:实例刚在内存中被创建出来，此时，还没有初始化好data和methods属性
+        created:实例已经在内存中创建OK，此时data和methods已经创建OK，此时还没有开始编译模板
+        beforeMount:此时已完成模板的编译，但是还没有挂载到页面中
+        mounted:此时，已经将编译好的模板，挂载到了页面指定的容器中显示
+
+    运行期间的生命周期函数：
+        beforeUpdate:状态更新之前执行此函数 ，此时data中的状态值是最新的，但是界面上显示 的数据依然
+        是旧的，因为此时还没有重新开始渲染dom节点
+        updated:实例更新完毕之后调用此函数，此时data中的状态值和界面上显示的数据 ，都已经完成了更新
+        ，界面已经被重新渲染好了！
+
+    销毁期间的生命周期函数：
+        beforeDestroy:实例销毁之前调用。在这一些，实例仍然完全可用
+        destroyed:Vue实例销毁后调用，调用后，Vue实例指示的所有东西都会解绑定，所有的事件监听器会被移除，
+        所有的子实例也会被销毁 -->
+
+        <div id="app">
+            <h3 id="h3">{{msg}}</h3>
+        </div>
+
+        <script>
+            var vm = new Vue({
+                el:'#app',
+                data:{
+                    msg:'ok'
+                },
+                methods:{
+                    show(){
+                        console.log('执行了show的方法')
+                    }
+                },
+                beforeCreate(){
+                    // 此时，还没有初始化好data和methods属性
+                    // console.log(this.msg);
+                    // this.show();
+                },
+                created(){
+                    // 实例已经在内存中创建OK，此时data和methods已经创建OK，此时还没有开始编译模板
+                    // 如果要调用data和methods，最早，只能在created中操作
+                    // console.log(this.msg);
+                    // this.show();
+                },
+                beforeMount(){
+                    // 已完成模板的编译，但是还没有挂载到页面中
+                    // console.log(document.getElementById('h3').innerText);
+                },
+                mounted(){
+                    // 已经将编译好的模板，挂载到了页面指定的容器中显示,
+                    // 注意：mounted是实例创建期间的最后一个生命周期函数，当执行完mounted就表示，实例已经被完全创建好了
+                    // 此时如果没有其它操作，这个实例，就静静的躺在我们内存中，一动不动
+                    console.log(document.getElementById('h3').innerText)
+                }
+            })
+        </script>
+</body>
+</html>
