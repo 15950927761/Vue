@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>vue-resource</title>
+    <title>自定义v-前缀</title>
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <style>
         .v-enter, .v-leave-to{
@@ -13,6 +13,14 @@
         }
        .v-enter-active, .v-leave-active{
            transition:all 0.4s ease;
+       }
+
+       .my-enter, .my-leave-to{
+           opacity: 0;
+           transform:translateY(100px);
+       }
+       .my-enter-active, .my-leave-active{
+           transition:all 0.5s ease;
        }
 
     </style>
@@ -25,6 +33,12 @@
         <transition>
             <h3 v-if="flag">这是一个h3</h3>
         </transition>
+
+        <hr>
+        <input type="button" value="toggle2" @click="flag2=!flag2">
+        <transition name="my">
+            <h6 v-if="flag2">这是一个h6</h6>
+        </transition>
     </div>
 
     <script>
@@ -32,7 +46,8 @@
         var vm = new Vue({
             el:'#app',
             data:{
-                flag:false
+                flag:false,
+                flag2:false
             }
         })
     </script>
