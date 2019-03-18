@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-resource</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://cdn.bootcss.com/vue-resource/1.5.1/vue-resource.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+</head>
+<body>
+    
+    <div id="app">
+        
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">添加品牌</h3>
+            </div>
+            <div class="panel-body form-inline">
+               <label>
+                    name: <input type="text" v-model="name" class="form-inline">
+                </label>
+
+                <input type="button" @click="add" value="添加" class="btn btn-primary">
+            </div>
+        </div>
+        
+
+
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Ctime</th>
+                    <th>Operation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="item in list" :key="item.id">
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.ctime}}</td>
+                    <td><a href="" @click.prevent="del(item.id)">删除</a></td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </div>
+
+    <script>
+        // 如果我们通过全局配置了请求的数据接口根域名，则在每次单独发起的http请求的时候，
+        // 请求的url路径，应该以相对路径开头，前面不能带斜线，否则就不会启用根路径拼接
+        Vue.http.options.root = 'http://www.liulongbin.top:3005';
+
+        // Vue.http.options.emulateJSON = true;
+
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                name:'',
+                list:[
+                    { id:1,name:'五菱宏光',ctime:new Date() },
+                    { id:2,name:'众泰',ctime:new Date() },
+                ]
+            },
+            created(){
+                this.getAllList();
+            },
+            methods:{
+                add(){//添加品牌列表到服务器
+                    this.$http.post('api/addproduct',{name:this.name}).then(result=>{
+                        if(result.body.status==0){
+                            this.getAllList();
+                            this.name=''
+                        }else{
+                            alert('添加失败')
+                        }
+                    })
+                },
+                getAllList(){//获取所有品牌列表
+                    this.$http.get('api/getprodlist').then(result=>{
+                       if(result.body.status==0){
+                           this.list = result.body.message
+                        //    console.log(result.body.message);
+                       }else{
+                           alert('数据传输失败');
+                       }
+                    })
+                },
+                del(id){//删除品牌列表
+                    this.$http.get('api/delproduct/' + id).then(result=>{
+                        if(result.body.status==0){
+                            this.getAllList();
+                        }else{
+                            alert('删除失败');
+                        }
+                    })
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>
