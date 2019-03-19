@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>组件data必须是一个function</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+     
+    <div id="app">
+        <mycom1></mycom1>
+        <hr>
+        <mycom1></mycom1>
+        <hr>
+        <mycom1></mycom1>
+    </div>
+
+    <template id="tmp1">
+        <div>
+            <input type="button" value="+1" @click="increment">
+            <h3>{{count}}</h3>
+        </div>
+    </template>
+
+
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{},
+            methods:{},
+            components:{
+                mycom1:{
+                    template:'#tmp1',
+                    data:function(){
+                        return {count:0};
+                    },
+                    methods:{
+                        increment(){
+                            this.count++
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>

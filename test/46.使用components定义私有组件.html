@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>定义私有组件</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+     
+    <div id="app">
+        <mycom1></mycom1>
+    </div>
+
+    <div id="app2">
+            <mycom2></mycom2>
+     </div>
+
+    <template id="tmp1">
+        <div><h1>我是一个h1</h1><span>123123</span></div>
+    </template>
+
+    <template id="tmp2">
+            <div><h1>我是一个h2</h1><span>2324243</span></div>
+        </template>
+
+    <script>
+
+        // var vm = new Vue({
+        //     el:'#app',
+        //     data:{},
+        //     methods:{},
+        //     filters:{},//过滤器
+        //     directives:{},//指令
+        //     components:{},//定义实例内部私有组件
+
+        //     // 钩子函数
+        //     beforeCreate(){},
+        //     created(){},
+        //     beforeMount(){},
+        //     mounted(){},
+        //     beforeUpdate(){},
+        //     updated(){},
+        //     beforeDestroy(){},
+        //     destroyed(){}
+        // })
+
+        var vm = new Vue({
+            el:'#app',
+            data:{},
+            components:{
+                mycom1:{
+                    template:'#tmp1'
+                }
+            }
+        })
+
+        var vm2 = new Vue({
+            el:'#app2',
+            data:{},
+            components:{
+                mycom2:{
+                    template:'#tmp2'
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>

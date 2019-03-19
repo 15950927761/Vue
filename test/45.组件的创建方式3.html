@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>组件的创建方式3</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+     
+    <div id="app">
+        <!-- 如果要使用组件，直接把组件 的名称，以html标签的形式，引入 到页面中即可 -->
+        <my-com1></my-com1>
+
+
+    </div>
+
+    <template id="tmp1">
+        <div><h1>我是一个h1</h1><span>123123</span></div>
+    </template>
+    <script>
+
+
+        // Vue.component('myCom1',Vue.extend({
+        //     template:'<h1>我是一个h1</h1>'
+        // }))
+
+        // 无论是哪种方式创建出来的组件，组件的template属性指向的模板的内容，必须有且只有一个根元素
+        Vue.component('myCom1',{
+            template:'#tmp1'
+        })
+
+
+
+        var vm = new Vue({
+            el:'#app',
+            data:{}
+        })
+    </script>
+
+</body>
+</html>

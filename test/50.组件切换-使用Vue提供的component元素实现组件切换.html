@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>组件切换-使用Vue提供的component元素实现组件切换</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+     
+   <div id="app">
+    <a href="" @click.prevent="comName='login'">登录</a>
+    <a href="" @click.prevent="comName='register'">注册</a>    
+    <a href="" @click.prevent="comName='user'">用户信息</a>    
+    <!-- Vue提供了component，来展示对应名称的组件    -->
+        <!-- component是一个点位符，:is属性，可以用来指定要展示的组件的名称 -->
+        <component :is="comName"></component>
+
+        <!-- 当前学习了几个Vue提供的标签了 -->
+        <!-- component,template,transition,transition-group -->
+
+   </div>
+
+    <template id="logo">
+        <div><h3>登录组件</h3></div>
+    </template>
+
+    <template id="register">
+        <div><h3>注册组件</h3></div>
+    </template>
+
+    <template id="user">
+            <div><h3>用户信息</h3></div>
+        </template>
+
+    <script>
+        Vue.component('login',{
+            template:'#logo'
+        })
+
+        Vue.component('register',{
+            template:'#register'
+        })
+
+        Vue.component('user',{
+            template:'#user'
+        })
+        
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                comName:'login'//代表component中的:is绑定的组件的名称
+            },
+            methods:{}
+        })
+    </script>
+</body>
+</html>
