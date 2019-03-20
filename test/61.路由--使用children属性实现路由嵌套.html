@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>路由--使用children属性实现路由嵌套</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.9/vue.js"></script>
+    <script src="https://cdn.bootcss.com/vue-router/3.0.2/vue-router.js"></script>
+
+</head>
+<body>
+     
+   <div id="app">
+        <router-link to="/account">account组件</router-link>
+        <router-link to="/model">model组件</router-link>
+        <router-view></router-view>
+   </div>
+
+   <template id="account">
+       <div>
+           <h1>account组件</h1>
+           <router-link to="/account/login">登录</router-link>
+           <router-link to="/account/register">注册</router-link>
+           <router-view></router-view>
+       </div>
+   </template>
+
+   <template id="model">
+        <div>
+            <h1>model组件</h1>
+            <router-link to="/model/model1">模板1</router-link>
+            <router-link to="/model/model2">模板2</router-link>
+            <router-view></router-view>
+        </div>
+    </template>
+
+   <script>
+      var account = {
+          template:'#account'
+      }
+
+      var model = {
+          template:'#model'
+      }
+
+      var login = {
+          template:'<h1>登录</h1>'
+      }
+
+      var register = {
+          template:'<h1>注册</h1>'
+      }
+
+      var model1 = {
+          template:'<h1>模板1</h1>'
+      }
+
+      var model2 = {
+          template:'<h1>模板2</h1>'
+      }
+      
+      var router = new VueRouter({
+          routes:[
+              { 
+                  path:'/account',
+                  component:account,
+                  children:[
+                      { path:'login',component:login },
+                      { path:'register',component:register }
+                  ] 
+              },
+              {
+                  path:'/model',
+                  component:model,
+                  children:[
+                      { path:'model1',component:model1 },
+                      { path:'model2',component:model2 }
+                  ]
+              }
+          ]
+      })
+
+       var vm = new Vue({
+           el:'#app',
+           data:{},
+           methods:{},
+           router
+       })
+   </script>
+</body>
+</html>
