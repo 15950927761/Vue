@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>名称案例--使用watch监听文本框数据的变化</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.9/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="firstname">+
+        <input type="text" v-model="lastname">=
+        <input type="text" v-model="fullname">
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                firstname:'',
+                lastname:'',
+                fullname:''
+            },
+            methods:{},
+            watch:{//使用这个属性可以监视data中指定数据 的变化 ，然后触发watch中对应的function处理函数
+                // 'firstname':function(){//中间没有横线，引号可加可不加
+                //     this.fullname = this.firstname + this.lastname;
+                // },
+                'firstname':function(newVal,oldVal){
+                    this.fullname = newVal + this.lastname;
+                },
+                'lastname':function(newVal){
+                    this.fullname = this.firstname + newVal;
+                }
+            }
+        })
+    </script>
+    
+</body>
+</html>
